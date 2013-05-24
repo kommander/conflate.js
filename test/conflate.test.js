@@ -76,4 +76,16 @@ describe('Conflate', function(){
       expect(e).to.be.a(Error);
     });
   });
+
+  //
+  //
+  it('should ignore non objects', function(){
+    var x = { a: 1, c: { e: true } };
+    
+    var z = conflate(x, null);
+
+    expect(z.a).to.be(1);
+    expect(z).to.have.property('c');
+    expect(z.c).to.have.property('e', true);
+  });
 });
