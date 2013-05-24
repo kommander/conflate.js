@@ -49,5 +49,17 @@ describe('Conflate', function(){
     expect(x.c).to.have.property('e', true);
   });
 
+  //
+  //
+  it('should clone onto new object', function(){
+    var x = { a: 1, c: { e: true } };
+    var y = { b: '0', c: { d: null } };
+    
+    var z = conflate({}, x, y);
 
+    expect(z.b).to.be('0');
+    expect(z).to.have.property('c');
+    expect(z.c).to.have.property('d', null);
+    expect(z.c).to.have.property('e', true);
+  });
 });
