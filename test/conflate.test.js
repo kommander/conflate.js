@@ -57,6 +57,10 @@ describe('Conflate', function(){
     
     var z = conflate({}, x, y);
 
+    x.a = 2;
+    y.b = '1';
+
+    expect(z.a).to.be(1);
     expect(z.b).to.be('0');
     expect(z).to.have.property('c');
     expect(z.c).to.have.property('d', null);
