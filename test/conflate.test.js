@@ -66,4 +66,14 @@ describe('Conflate', function(){
     expect(z.c).to.have.property('d', null);
     expect(z.c).to.have.property('e', true);
   });
+
+  //
+  //
+  it('should complain with too little arguments', function(){
+    expect(function(){
+      conflate({});
+    }).to.throwException(function (e) {
+      expect(e).to.be.a(Error);
+    });
+  });
 });
