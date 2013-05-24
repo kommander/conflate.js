@@ -12,9 +12,9 @@ Simply merge multiple objects
 var conflate = require('conflate');
 
 var obj1 = { a: 1 };
-var obj2 = { b: 2, d: { deep: true } };
+var obj2 = { b: 2, d: { e: true } };
 var merged = conflate(obj1, obj2);
-// -> { a: 1, b: 2, d: { deep: true } }
+// -> { a: 1, b: 2, d: { e: true } }
 ```
 
 
