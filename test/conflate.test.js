@@ -35,5 +35,19 @@ describe('Conflate', function(){
     expect(x).to.have.property('e', '1');
   });
 
+  //
+  //
+  it('should merge existing object values', function(){
+    var x = { a: 1, c: { e: true } };
+    var y = { b: '0', c: { d: null } };
+    
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('d', null);
+    expect(x.c).to.have.property('e', true);
+  });
+
 
 });
