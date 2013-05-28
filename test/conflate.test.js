@@ -88,4 +88,40 @@ describe('Conflate', function(){
     expect(z).to.have.property('c');
     expect(z.c).to.have.property('e', true);
   });
+  
+  //
+  //
+  it('should apply conversion function on properties', function(){
+    var x = { a: 1, c: 3 };
+    var y = { b: 2, d: 4 };
+    
+    var z = conflate(x, y, function(key, value){
+      if(key == 'b' || key == 'd'){
+        return ++value;
+      }
+    });
+
+    expect(z.b).to.be(3);
+    expect(z.d).to.be(5);
+  });
+
+  //
+  //
+  it('should apply multiple conversion functions on properties', function(){
+    var x = { a: 1, c: 3 };
+    var y = { b: 2, d: 4 };
+    
+    var z = conflate(x, y, function(key, value){
+      if(key == 'b' || key == 'd'){
+        return ++value;
+      }
+    }, function(key, value){
+      if(key == 'b' || key == 'd'){
+        return ++value;
+      }
+    });
+
+    expect(z.b).to.be(4);
+    expect(z.d).to.be(6);
+  });
 });
