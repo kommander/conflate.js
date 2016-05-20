@@ -33,6 +33,28 @@ describe('Conflate', function(){
 
   //
   //
+  it('should handle boolean values (2)', function(){
+    var x = { a: false };
+    var y = { a: true };
+
+    const result = conflate(x, y);
+
+    expect(result.a).to.be(true);
+  });
+
+  //
+  //
+  it('should handle boolean values (3)', function(){
+    var x = { a: false };
+    var y = { a: true };
+
+    const result = conflate({}, x, y);
+
+    expect(result.a).to.be(true);
+  });
+
+  //
+  //
   it('should simply merge multiple objects', function(){
     var x = { a: 1 };
     var y = { b: '0', c: { d: null } };
