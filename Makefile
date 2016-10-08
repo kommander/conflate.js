@@ -4,6 +4,12 @@ test:
 		--reporter spec
 .PHONY: test
 
+specs:
+	@echo 'Creating specs file from tests.'
+	make test > specs
+	@echo 'Done.'
+.PHONY: specs
+
 coverage:
 	@node ./node_modules/istanbul/lib/cli.js cover \
 	./node_modules/.bin/_mocha -- --recursive --reporter dot
@@ -29,4 +35,38 @@ hooks:
 	chmod +x ./.git/hooks/pre-push
 .PHONY: hooks
 
-dev: setup hooks
+clean:
+	@echo "Housekeeping..."
+	rm -rf ./node_modules
+	rm -rf ./coverage
+	@echo "Clean."
+.PHONY: clean
+
+dev: clean setup hooks lint test coverage
+
+release-patch: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "patch")')
+release-minor: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "minor")')
+release-major: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "major")')
+prerelease-alpha: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "prerelease", "alpha")')
+prerelease-beta: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "prerelease", "beta")')
+prerelease-rc: NEXT_VERSION = $(shell node -pe 'require("semver").inc("$(VERSION)", "prerelease", "rc")')
+release-patch: release
+release-minor: release
+release-major: release
+prerelease-alpha: release
+prerelease-beta: release
+prerelease-rc: release
+
+release: mincov test specs
+	@printf "Current version is $(VERSION). This will publish version $(NEXT_VERSION). Press [enter] to continue." >&2
+	@read
+	@node -e '\
+		var j = require("./package.json");\
+		j.version = "$(NEXT_VERSION)";\
+		var s = JSON.stringify(j, null, 2);\
+		require("fs").writeFileSync("./package.json", s);'
+		@git commit package.json specs -m 'Version $(NEXT_VERSION)'
+		@git tag -a "v$(NEXT_VERSION)" -m "Version $(NEXT_VERSION)"
+	@git push --tags origin HEAD:master
+	npm publish
+.PHONY: release release-patch release-minor release-major

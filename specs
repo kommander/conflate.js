@@ -1,0 +1,23 @@
+
+
+  Conflate
+    ✓ merges two objects
+    ✓ handles boolean values
+    ✓ handles boolean values (2)
+    ✓ handles boolean values (3)
+    ✓ merges multiple objects
+    ✓ merges existing object values
+    ✓ overrides existing deep object values
+    ✓ merges arrays
+    ✓ merges to unique values in arrays
+    ✓ overrides with array
+    ✓ overrides object left with array
+    ✓ clones onto new object
+    ✓ complains with too little arguments
+    ✓ ignores non objects
+    ✓ applies conversion function on properties
+    ✓ applies multiple conversion functions on properties
+
+
+  16 passing (43ms)
+
