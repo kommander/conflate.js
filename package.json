@@ -10,6 +10,10 @@
   },
   "homepage": "https://github.com/kommander/conflate.js",
   "devDependencies": {
+    "eslint": "^2.7.0",
+    "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-jsx-a11y": "https://registry.npmjs.org/eslint-plugin-jsx-a11y/-/eslint-plugin-jsx-a11y-0.6.2.tgz",
+    "eslint-plugin-react": "^4.3.0",
     "expect.js": "^0.3.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.1.0"

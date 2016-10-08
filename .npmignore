@@ -8,3 +8,5 @@ test
 Makefile
 dev
 *.log
+coverage
+.travis.yml

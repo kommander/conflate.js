@@ -2,16 +2,15 @@
  * Tests
  */
 
-var expect = require('expect.js');
-var conflate = require(__dirname + '/../lib/conflate');
+const expect = require('expect.js');
+const conflate = require(__dirname + '/../lib/conflate'); // eslint-disable-line
 
-describe('Conflate', function(){
-
+describe('Conflate', () => {
   //
   //
-  it('merges two objects', function(){
-    var x = { a: 1 };
-    var y = { b: '0', c: { d: null } };
+  it('merges two objects', () => {
+    const x = { a: 1 };
+    const y = { b: '0', c: { d: null } };
 
     conflate(x, y);
 
@@ -22,9 +21,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('handles boolean values', function(){
-    var x = { a: false };
-    var y = { a: true };
+  it('handles boolean values', () => {
+    const x = { a: false };
+    const y = { a: true };
 
     conflate(x, y);
 
@@ -33,9 +32,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('handles boolean values (2)', function(){
-    var x = { a: false };
-    var y = { a: true };
+  it('handles boolean values (2)', () => {
+    const x = { a: false };
+    const y = { a: true };
 
     const result = conflate(x, y);
 
@@ -44,9 +43,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('handles boolean values (3)', function(){
-    var x = { a: false };
-    var y = { a: true };
+  it('handles boolean values (3)', () => {
+    const x = { a: false };
+    const y = { a: true };
 
     const result = conflate({}, x, y);
 
@@ -55,10 +54,10 @@ describe('Conflate', function(){
 
   //
   //
-  it('merges multiple objects', function(){
-    var x = { a: 1 };
-    var y = { b: '0', c: { d: null } };
-    var z = { e: '1' };
+  it('merges multiple objects', () => {
+    const x = { a: 1 };
+    const y = { b: '0', c: { d: null } };
+    const z = { e: '1' };
 
     conflate(x, y, z);
 
@@ -70,9 +69,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('merges existing object values', function(){
-    var x = { a: 1, c: { e: true } };
-    var y = { b: '0', c: { d: null } };
+  it('merges existing object values', () => {
+    const x = { a: 1, c: { e: true } };
+    const y = { b: '0', c: { d: null } };
 
     conflate(x, y);
 
@@ -84,9 +83,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('overrides existing deep object values', function(){
-    var x = { a: 1, c: { e: true } };
-    var y = { b: '0', c: { e: null } };
+  it('overrides existing deep object values', () => {
+    const x = { a: 1, c: { e: true } };
+    const y = { b: '0', c: { e: null } };
 
     conflate(x, y);
 
@@ -97,9 +96,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('merges arrays', function(){
-    var x = { a: 1, c: { e: ['1', '2'] } };
-    var y = { b: '0', c: { e: ['3'] } };
+  it('merges arrays', () => {
+    const x = { a: 1, c: { e: ['1', '2'] } };
+    const y = { b: '0', c: { e: ['3'] } };
 
     conflate(x, y);
 
@@ -111,9 +110,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('merges to unique values in arrays', function(){
-    var x = { a: 1, c: { e: ['1', '2'] } };
-    var y = { b: '0', c: { e: ['2', '3'] } };
+  it('merges to unique values in arrays', () => {
+    const x = { a: 1, c: { e: ['1', '2'] } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
 
     conflate(x, y);
 
@@ -125,9 +124,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('overrides with array', function(){
-    var x = { a: 1, c: { e: null } };
-    var y = { b: '0', c: { e: ['2', '3'] } };
+  it('overrides with array', () => {
+    const x = { a: 1, c: { e: null } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
 
     conflate(x, y);
 
@@ -139,9 +138,9 @@ describe('Conflate', function(){
 
   //
   //
-  it('overrides object left with array', function(){
-    var x = { a: 1, c: { e: {} } };
-    var y = { b: '0', c: { e: ['2', '3'] } };
+  it('overrides object left with array', () => {
+    const x = { a: 1, c: { e: {} } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
 
     conflate(x, y);
 
@@ -154,11 +153,11 @@ describe('Conflate', function(){
 
   //
   //
-  it('clones onto new object', function(){
-    var x = { a: 1, c: { e: true } };
-    var y = { b: '0', c: { d: null } };
+  it('clones onto new object', () => {
+    const x = { a: 1, c: { e: true } };
+    const y = { b: '0', c: { d: null } };
 
-    var z = conflate({}, x, y);
+    const z = conflate({}, x, y);
 
     x.a = 2;
     y.b = '1';
@@ -172,20 +171,20 @@ describe('Conflate', function(){
 
   //
   //
-  it('complains with too little arguments', function(){
-    expect(function(){
+  it('complains with too little arguments', () => {
+    expect(() => {
       conflate({});
-    }).to.throwException(function (e) {
+    }).to.throwException((e) => {
       expect(e).to.be.a(Error);
     });
   });
 
   //
   //
-  it('ignores non objects', function(){
-    var x = { a: 1, c: { e: true } };
+  it('ignores non objects', () => {
+    const x = { a: 1, c: { e: true } };
 
-    var z = conflate(x, null);
+    const z = conflate(x, null);
 
     expect(z.a).to.be(1);
     expect(z).to.have.property('c');
@@ -194,14 +193,15 @@ describe('Conflate', function(){
 
   //
   //
-  it('applies conversion function on properties', function(){
-    var x = { a: 1, c: 3 };
-    var y = { b: 2, d: 4 };
+  it('applies conversion function on properties', () => {
+    const x = { a: 1, c: 3 };
+    const y = { b: 2, d: 4 };
 
-    var z = conflate(x, y, function(key, value){
-      if(key == 'b' || key == 'd'){
-        return ++value;
+    const z = conflate(x, y, (key, value) => {
+      if (key === 'b' || key === 'd') {
+        return ++value; // eslint-disable-line
       }
+      return value;
     });
 
     expect(z.b).to.be(3);
@@ -210,18 +210,20 @@ describe('Conflate', function(){
 
   //
   //
-  it('applies multiple conversion functions on properties', function(){
-    var x = { a: 1, c: 3 };
-    var y = { b: 2, d: 4 };
+  it('applies multiple conversion functions on properties', () => {
+    const x = { a: 1, c: 3 };
+    const y = { b: 2, d: 4 };
 
-    var z = conflate(x, y, function(key, value){
-      if(key == 'b' || key == 'd'){
-        return ++value;
+    const z = conflate(x, y, (key, value) => {
+      if (key === 'b' || key === 'd') {
+        return ++value; // eslint-disable-line
       }
-    }, function(key, value){
-      if(key == 'b' || key == 'd'){
-        return ++value;
+      return value;
+    }, (key, value) => {
+      if (key === 'b' || key === 'd') {
+        return ++value; // eslint-disable-line
       }
+      return value;
     });
 
     expect(z.b).to.be(4);
