@@ -1,3 +1,5 @@
+VERSION = $(shell node -pe 'require("./package.json").version')
+
 test:
 	@./node_modules/.bin/mocha \
 		--check-leaks \
