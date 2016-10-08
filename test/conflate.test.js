@@ -84,6 +84,76 @@ describe('Conflate', function(){
 
   //
   //
+  it('should override existing deep object values', function(){
+    var x = { a: 1, c: { e: true } };
+    var y = { b: '0', c: { e: null } };
+
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e', null);
+  });
+
+  //
+  //
+  it('should merge arrays', function(){
+    var x = { a: 1, c: { e: ['1', '2'] } };
+    var y = { b: '0', c: { e: ['3'] } };
+
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e');
+    expect(x.c.e).to.have.property('length', 3);
+  });
+
+  //
+  //
+  it('should merge to unique values in arrays', function(){
+    var x = { a: 1, c: { e: ['1', '2'] } };
+    var y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e');
+    expect(x.c.e).to.have.property('length', 3);
+  });
+
+  //
+  //
+  it('should override with array', function(){
+    var x = { a: 1, c: { e: null } };
+    var y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e');
+    expect(x.c.e).to.have.property('length', 2);
+  });
+
+  //
+  //
+  it('should override object left with array', function(){
+    var x = { a: 1, c: { e: {} } };
+    var y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e');
+    expect(x.c.e).to.have.property('length', 2);
+  });
+
+
+  //
+  //
   it('should clone onto new object', function(){
     var x = { a: 1, c: { e: true } };
     var y = { b: '0', c: { d: null } };
