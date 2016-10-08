@@ -9,7 +9,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should simply merge two objects', function(){
+  it('merges two objects', function(){
     var x = { a: 1 };
     var y = { b: '0', c: { d: null } };
 
@@ -22,7 +22,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should handle boolean values', function(){
+  it('handles boolean values', function(){
     var x = { a: false };
     var y = { a: true };
 
@@ -33,7 +33,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should handle boolean values (2)', function(){
+  it('handles boolean values (2)', function(){
     var x = { a: false };
     var y = { a: true };
 
@@ -44,7 +44,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should handle boolean values (3)', function(){
+  it('handles boolean values (3)', function(){
     var x = { a: false };
     var y = { a: true };
 
@@ -55,7 +55,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should simply merge multiple objects', function(){
+  it('merges multiple objects', function(){
     var x = { a: 1 };
     var y = { b: '0', c: { d: null } };
     var z = { e: '1' };
@@ -70,7 +70,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should merge existing object values', function(){
+  it('merges existing object values', function(){
     var x = { a: 1, c: { e: true } };
     var y = { b: '0', c: { d: null } };
 
@@ -84,7 +84,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should override existing deep object values', function(){
+  it('overrides existing deep object values', function(){
     var x = { a: 1, c: { e: true } };
     var y = { b: '0', c: { e: null } };
 
@@ -97,7 +97,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should merge arrays', function(){
+  it('merges arrays', function(){
     var x = { a: 1, c: { e: ['1', '2'] } };
     var y = { b: '0', c: { e: ['3'] } };
 
@@ -111,7 +111,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should merge to unique values in arrays', function(){
+  it('merges to unique values in arrays', function(){
     var x = { a: 1, c: { e: ['1', '2'] } };
     var y = { b: '0', c: { e: ['2', '3'] } };
 
@@ -125,7 +125,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should override with array', function(){
+  it('overrides with array', function(){
     var x = { a: 1, c: { e: null } };
     var y = { b: '0', c: { e: ['2', '3'] } };
 
@@ -139,7 +139,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should override object left with array', function(){
+  it('overrides object left with array', function(){
     var x = { a: 1, c: { e: {} } };
     var y = { b: '0', c: { e: ['2', '3'] } };
 
@@ -154,7 +154,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should clone onto new object', function(){
+  it('clones onto new object', function(){
     var x = { a: 1, c: { e: true } };
     var y = { b: '0', c: { d: null } };
 
@@ -172,7 +172,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should complain with too little arguments', function(){
+  it('complains with too little arguments', function(){
     expect(function(){
       conflate({});
     }).to.throwException(function (e) {
@@ -182,7 +182,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should ignore non objects', function(){
+  it('ignores non objects', function(){
     var x = { a: 1, c: { e: true } };
 
     var z = conflate(x, null);
@@ -194,7 +194,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should apply conversion function on properties', function(){
+  it('applies conversion function on properties', function(){
     var x = { a: 1, c: 3 };
     var y = { b: 2, d: 4 };
 
@@ -210,7 +210,7 @@ describe('Conflate', function(){
 
   //
   //
-  it('should apply multiple conversion functions on properties', function(){
+  it('applies multiple conversion functions on properties', function(){
     var x = { a: 1, c: 3 };
     var y = { b: 2, d: 4 };
 

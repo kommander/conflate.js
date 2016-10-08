@@ -11,6 +11,7 @@
   "homepage": "https://github.com/kommander/conflate.js",
   "devDependencies": {
     "expect.js": "^0.3.1",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.0"
   },
   "scripts": {
