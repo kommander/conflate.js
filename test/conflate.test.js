@@ -150,6 +150,32 @@ describe('Conflate', () => {
     expect(x.c.e).to.have.property('length', 2);
   });
 
+  //
+  //
+  it('allows to ignore certain keys', () => {
+    const x = { a: 1, c: { e: 0 } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y, ['e']);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e', 0);
+  });
+
+  //
+  //
+  it('allows multiple ignore specs', () => {
+    const x = { a: 1, c: { e: 0 }, f: 0 };
+    const y = { b: '0', c: { e: ['2', '3'] }, f: 1 };
+
+    conflate(x, y, ['e'], ['f']);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x).to.have.property('f', 0);
+    expect(x.c).to.have.property('e', 0);
+  });
 
   //
   //
@@ -229,4 +255,8 @@ describe('Conflate', () => {
     expect(z.b).to.be(4);
     expect(z.d).to.be(6);
   });
+
+  //
+  //
+  it('applies conversions to nested objects');
 });

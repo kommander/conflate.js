@@ -17,6 +17,10 @@ coverage:
 	./node_modules/.bin/_mocha -- --recursive --reporter dot
 .PHONY: coverage
 
+report: coverage
+	@echo 'Opening default browser with coverage report.'
+	@open ./coverage/lcov-report/index.html
+
 mincov: coverage
 	@node ./node_modules/istanbul/lib/cli.js check-coverage --statements 90 --functions 90 --lines 90 --branches 90
 .PHONY: mincov
