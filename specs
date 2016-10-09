@@ -13,7 +13,10 @@
     ✓ overrides with array
     ✓ overrides object left with array
     ✓ allows to ignore certain keys
+    ✓ does not add the keys of an array in root
     ✓ allows multiple ignore specs
+    ✓ allows to whitelist keys
+    ✓ allows multiple whitelists
     ✓ clones onto new object
     ✓ complains with too little arguments
     ✓ ignores non objects
@@ -22,6 +25,6 @@
     - applies conversions to nested objects
 
 
-  18 passing (50ms)
+  21 passing (46ms)
   1 pending
 
