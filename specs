@@ -12,12 +12,16 @@
     ✓ merges to unique values in arrays
     ✓ overrides with array
     ✓ overrides object left with array
+    ✓ allows to ignore certain keys
+    ✓ allows multiple ignore specs
     ✓ clones onto new object
     ✓ complains with too little arguments
     ✓ ignores non objects
     ✓ applies conversion function on properties
     ✓ applies multiple conversion functions on properties
+    - applies conversions to nested objects
 
 
-  16 passing (42ms)
+  18 passing (50ms)
+  1 pending
 
