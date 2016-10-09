@@ -179,6 +179,35 @@ describe('Conflate', () => {
 
   //
   //
+  it('allows to whitelist keys', () => {
+    const x = { a: 1, c: { e: 0 } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y, 'a,c');
+
+    expect(x).to.not.have.property('b');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e', 0);
+  });
+
+  //
+  //
+  it('allows multiple whitelists', () => {
+    const x = { a: 1, c: { e: 0 }, g: 0 };
+    const y = { b: '0', c: { e: ['2', '3'] }, f: 1, g: 1, h: 1 };
+
+    conflate(x, y, 'a,c', 'f,g');
+
+    expect(x).to.not.have.property('b');
+    expect(x).to.not.have.property('h');
+    expect(x).to.have.property('c');
+    expect(x.c).to.have.property('e', 0);
+    expect(x).to.have.property('g', 1);
+    expect(x).to.have.property('f', 1);
+  });
+
+  //
+  //
   it('clones onto new object', () => {
     const x = { a: 1, c: { e: true } };
     const y = { b: '0', c: { d: null } };
