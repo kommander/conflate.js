@@ -165,6 +165,20 @@ describe('Conflate', () => {
 
   //
   //
+  it('does not add the keys of an array in root', () => {
+    const x = { a: 1, c: { e: 0 } };
+    const y = { b: '0', c: { e: ['2', '3'] } };
+
+    conflate(x, y, ['e']);
+
+    expect(x.b).to.be('0');
+    expect(x).to.have.property('c');
+    expect(x).to.not.have.property('0');
+    expect(x.c).to.have.property('e', 0);
+  });
+
+  //
+  //
   it('allows multiple ignore specs', () => {
     const x = { a: 1, c: { e: 0 }, f: 0 };
     const y = { b: '0', c: { e: ['2', '3'] }, f: 1 };
