@@ -302,4 +302,16 @@ describe('Conflate', () => {
   //
   //
   it('applies conversions to nested objects');
+  //
+  //
+  it('prevent prototype pollution', () => {
+    const x = {};
+    const y = JSON.parse('{"__proto__": {"polluted": true}}');
+
+    const r = conflate(x, y);
+
+    expect(r.polluted).to.equal(undefined);
+    expect({}.polluted).to.not.equal(true);
+    expect({}.polluted).to.equal(undefined);
+  });
 });
